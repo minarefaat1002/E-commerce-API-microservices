@@ -8,6 +8,8 @@ services:
     command: /app/entrypoint.sh
     ports:
       - "8000:8000"
+    env_file:
+      - ./.env
     volumes:
       - .:/app
     depends_on:
@@ -53,6 +55,8 @@ services:
     command: celery -A core flower --basic_auth=admin:password123
     ports:
       - "5555:5555"
+    env_file:
+      - ./.env
     depends_on:
       - redis
 
