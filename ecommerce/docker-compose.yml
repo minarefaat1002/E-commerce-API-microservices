@@ -70,6 +70,18 @@ services:
       - redis
       - app
 
+  elasticsearch:
+    container_name: search
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.13.0
+    volumes:
+      - esdata01:/usr/share/elasticsearch/data
+    ports:
+      - 9200:9200
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+
 volumes:
   postgres_data:
   redis_data:
+  esdata01:

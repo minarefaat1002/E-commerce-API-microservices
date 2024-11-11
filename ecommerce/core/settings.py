@@ -59,9 +59,11 @@ INSTALLED_APPS = [
     "corsheaders",
     'djoser',
     'rest_framework_simplejwt',
+    "django_elasticsearch_dsl",
     # internal apps 
     'home',
     'users',
+    'store',
 ]
 
 MIDDLEWARE = [
@@ -107,6 +109,13 @@ DATABASES = {
         'PASSWORD':'postgres',
         'HOST': 'postgres',
         'PORT':5432
+    }
+}
+
+
+ELASTICSEARCH_DSL = {
+    'default': {
+        'hosts': 'http://search:9200'
     }
 }
 
@@ -221,3 +230,8 @@ EMAIL_HOST_PASSWORD = 'nigttknxarvjgkba'
 EMAIL_USE_TLS = True
 DOMAIN = 'localhost:5173'
 SITE_NAME = 'Ecommerce website'
+
+
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
