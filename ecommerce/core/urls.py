@@ -18,8 +18,8 @@ from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import path,include
-from home.views import count_to_10
-from home.views import home_view
+# from home.views import count_to_10
+# from home.views import home_view
 from rest_framework import routers
 from drf import views
 from drf.views import SearchProduct
@@ -31,8 +31,8 @@ router.register(
 )
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('count/',count_to_10,name="count"),
-    path('home/',home_view,name='home'),
+    # path('count/',count_to_10,name="count"),
+    # path('home/',home_view,name='home'),
     path('api/v1/auth/',include('djoser.urls')),
     path('api/v1/auth/',include('djoser.urls.jwt')),
     path("",include(router.urls)),
