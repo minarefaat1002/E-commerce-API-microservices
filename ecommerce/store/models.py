@@ -10,8 +10,8 @@ class ProductManager(models.Manager):
 
 
 class Category(models.Model):
-    name = models.CharField(max_length=255, db_index=True)
-    slug = models.SlugField(max_length=255, unique=True)
+    slug = models.SlugField(primary_key=True, max_length=255)
+    name = models.CharField(max_length=255)
 
     class Meta:
         verbose_name_plural = 'categories'
@@ -23,10 +23,8 @@ class Category(models.Model):
 
 class Product(models.Model):
     category = models.ManyToManyField(Category)
-    # data = models.Product.objects.filter(category__name=category)
     created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='product_creator')
     title = models.CharField(max_length=255)
-    author = models.CharField(max_length=255, default='admin')
     description = models.TextField(blank=True)
     image = models.ImageField(upload_to='images/',default='images/default.png')
     slug = models.SlugField(max_length=255)
@@ -50,10 +48,10 @@ class Product(models.Model):
 
 
 class Order(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='order_user')
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, related_name='order_user',null=True)
     created = models.DateTimeField(auto_now_add=True)
     address = models.CharField(max_length=200)
-    city = models.CharField(200)
+    city = models.CharField(max_length=255)
     phone = models.CharField(max_length=20)
     post_code = models.CharField(max_length=20)
     updated = models.DateTimeField(auto_now=True)

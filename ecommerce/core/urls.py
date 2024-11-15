@@ -20,12 +20,30 @@ from django.conf.urls.static import static
 from django.urls import path,include
 from home.views import count_to_10
 from home.views import home_view
+from rest_framework import routers
+from drf import views
+from drf.views import SearchProduct
+
+
+router = routers.DefaultRouter()
+router.register(
+    r'api/products', views.AllProductsViewset,basename="allproducts"
+)
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('count/',count_to_10,name="count"),
     path('home/',home_view,name='home'),
     path('api/v1/auth/',include('djoser.urls')),
     path('api/v1/auth/',include('djoser.urls.jwt')),
+    path("",include(router.urls)),
+    path("api/products/search/<str:query>/",SearchProduct.as_view()),
+    path("api/category/",views.CategoryList.as_view()),
+    path("api/category/<str:query>/",views.ProductByCategory.as_view()),
+    path("api/cart/add",views.add),
+    path("api/cart/<int:id>",views.remove),
+    path("api/cart",views.cart),
+    path("api/cart/order",views.order),
+
 ]
 
 if settings.DEBUG:

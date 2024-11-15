@@ -10,7 +10,7 @@ class ProductDocument(Document):
 
     class Django:
         model = Product
-        fields = ["title", "author", "description"]
+        fields = ["id","title", "description","price"] 
 '''
 from elasticsearch_dsl.query import MultiMatch
 from .documents import ProductDocument 

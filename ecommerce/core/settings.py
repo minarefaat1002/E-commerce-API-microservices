@@ -64,6 +64,7 @@ INSTALLED_APPS = [
     'home',
     'users',
     'store',
+    'drf',
 ]
 
 MIDDLEWARE = [
@@ -71,7 +72,7 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     "corsheaders.middleware.CorsMiddleware",
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    # 'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -172,14 +173,16 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
+    'DEFAULT_PAGINATION_CLASS':"rest_framework.pagination.LimitOffsetPagination",
+    "PAGE_SIZE":2,
 }
 
 
 
 SIMPLE_JWT = {
     "AUTH_HEADER_TYPES": (
-        "Bearer",
-        "JWT"),
+        "JWT",
+        "Bearer",),
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=120),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=60),
     "SIGNING_KEY": env("SIGNING_KEY"),
@@ -235,3 +238,7 @@ SITE_NAME = 'Ecommerce website'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+
+
+CART_SESSION_ID = 'cart'
+SESSION_COOKIE_AGE = 86400
