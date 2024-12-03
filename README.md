@@ -1,4 +1,4 @@
-Here's a video of testing the project on linkedin [linkedin](https://pages.github.com/)
+Here's a video of testing the project on linkedin [linkedin](https://www.linkedin.com/feed/update/urn:li:activity:7263339859107307520/)
 # The tech stack:
 ## 🐳 Docker 
 Containerized the microservices to ensure easy deployment and scalability across environments.
